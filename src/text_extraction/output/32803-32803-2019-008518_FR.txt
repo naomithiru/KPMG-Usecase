@@ -1260,31 +1260,17 @@ Rémunération mensuelle brute à la veille de l'affectation - année X
 
 Salaire barémique : Barème O004 échelon 19
 
-Supplément de maîtrise
+ES dee SES
 
 Fonction de Patrouilleur (classe 1.4) avec Supplément de maîtrise Agent Multimodal (classe 1.3)
 
-ananas eneen. dee SE vn
+€ 3.000,14 € 0,00
 
-Rémunération mensuelle brute à la date de l’affectation - année X
+€ 100,00 € 0,00
 
-Salaire barémique :
-
-€ 3.000,14 , , Barème K003 échelon 19
-
-€ 0,00 Supplément de maîtrisé fonctionnelle
-
-€ 100,00 Supplément de maîtrise
-
-Supplément maintenance - (dépannage) - conducteur
-
-P/A (le cas échéant, intégrée dans le Complément de sauvegarde)
-
-€ 0,00 € 0,00 Complément de sauvegarde
+€ 0,00
 
 € 3,100,14
-
-Rémunération mensuelle brute à la date de l'affectation - année X+1
 
 T È
 
@@ -1292,9 +1278,25 @@ T È
 
 È ë
 
-€ 3.000 al ‘Salaire barémique :
+€ 3.000,14:
 
-_{Barème KO03 échelon 20
+Rémunération mensuelle brute à la date de l’affectation - année X
+
+Salaire barémique : Barème KO03 échelon 19
+
+Supplément de maîtrisé fonctionnelle
+
+Supplément de maîtrise
+
+Supplément maintenance - (dépannage) - conducteur
+
+P/A (le cas échéant, intégrée dans le Complément de sauvegarde)
+
+Complément de sauvegarde
+
+Rémunération mensuelle brute à la date de l'affectation - année X+1
+
+{Salaire barémique : _iBarème KO03 échelon 20
 
 £ £
 
@@ -1302,19 +1304,17 @@ _{Barème KO03 échelon 20
 
 $ £
 
-ï
-
 ‘Supplément de maîtrise fonctionnelle
 
 Supplément de maîtrise
 
-Supplément maintenance (dépannage) - conducteur"
+(dépannage) - conducteur
 
 Garantie carrière
 
-:Supplément maintenance :  (dépannage)- conducteur
+: (dépannage) - conducteur
 
-P/A {le cas échéant, intégrée dans le
+:Supplément maintenance P/A {le cas échéant, intégrée dans le : Complément de sauvegarde)
 
 Rémunération mensuelle brute à la veille de l'affectation - année X
 
@@ -1328,33 +1328,33 @@ Supplément maintenance - (dépannage) - conducteur
 
 Garantie carrière
 
-Li Complément de sauvegarde)
+€ 3.100,14:
+
+€ 3.000,14 € 0,00
+
+€ 100,00 € 0,00
+
+€ 0,00
+
+€ 3.100,14
+
+mens
 
 Complément de sauvegarde
-
-€ 3.100,14:
 
 Rémunération mensuelle brute à la date de l'affectation - année X+4
 
-Salaire barémique :
+Salaire barémique : Barème L003 échelon 23
 
-€ 3.000,14 | , Barème L003 échelon 23
+Supplément de maîtrise fonctionnelle
 
-€ 0,00 Supplément de maîtrise fonctionnelle
+Supplément de maîtrise
 
-€ 100,00 Supplément de maîtrise
+Supplément maintenance - (dépannage) - conducteur
 
-Supplément maintenance - (dépannage)
-
-€ 0,00 - conducteur
-
-P/A (le cas échéant, intégrée dans le
-
-€ 0,00 , Complément de sauvegarde)
+P/A (le cas échéant, intégrée dans le Complément de sauvegarde)
 
 Complément de sauvegarde
-
-€ 3.100,14
 
 CCT du 10/05/2019 relative à l'introduction d’un nouveau système de rémunération pour le personnel ayant le statut d’ouvrier - Annexe 4
 

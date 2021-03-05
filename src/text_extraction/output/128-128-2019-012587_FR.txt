@@ -64,7 +64,9 @@ pas un mols.
 
 Elle comporte également les avantages en nature qui sont soumis à des retenues de sécurité sociale. Par contre, les primes ou indemnités qui sont octroyées en contrepartie des frais réels ne sont pas prises en considération.
 
-2. Pour les ouvriers payés par mois, la rémunération gagnée au cours du mois de référence prévu au point 6 du présent paragraphe est considérée comme la rémunération brute.
+2. Pour les ouvriers payés par mois, la rémunération gagnée au cours du mois de référence prévu au point 6 du présent paragraphe est considérée
+
+comme la rémunération brute.
 
 3. Pour les ouvriers qui ne sont pas payés par mois, la rémunération brute est calculée sur la base de la rémunération horaire normale.
 
