@@ -9,6 +9,7 @@ there are three different formats already detected
 
 
 from pathlib import Path
+from PIL import Image
 import re
 
 import fasttext
@@ -20,10 +21,12 @@ from multiprocessing import Process
 
 
 # set folder to pdf files:
+# scraping_folder = Path('src/scraping/output')
 scraping_folder = Path('src/scraping/output')
 
 # set output txt folder:
-output_folder = Path('src/text_extraction/output')
+# output_folder = Path('src/text_extraction/output')
+output_folder = Path('src/text_extraction/testoutput')
 
 # sort scrape by commission popularity and put filename in index
 scrape = pd.read_json(scraping_folder / 'responses_2018_now.json')
@@ -39,6 +42,7 @@ class LanguageIdentification:
 
     def __init__(self):
         pretrained_lang_model = "src/text_extraction/lid.176.bin" #large more accurate model
+        # pretrained_lang_model = "./lid.176.bin" #large more accurate model
         self.model = fasttext.load_model(pretrained_lang_model)
 
     def predict_lang(self, text):
@@ -132,14 +136,32 @@ def Welcome(detector, pdf_path):
         img = convert_from_path(pdf_path, first_page = page, last_page = page, dpi = 425)
         if len(img) == 0:
             break
+
+        report = pytesseract.image_to_osd(img[0])
+        
+        if report.split("\n")[1].split(":")[1].replace(" ", "") == "270":
+            img = np.array(img[0]) # convert PIL.PpmImagePlugin.PpmImageFile to np.array
+            img_pil = Image.fromarray(np.uint8(img)).convert('RGB') # np.array to PIL image
+            rotated  = img_pil.transpose(Image.ROTATE_270) #rotate the image 
+            img = np.array(rotated)# convert the page to np array to see as image
+        
+        elif report.split("\n")[1].split(":")[1].replace(" ", "") == "90":
+            img = np.array(img[0]) # convert PIL.PpmImagePlugin.PpmImageFile to np.array
+            img_pil = Image.fromarray(np.uint8(img)).convert('RGB') # np.array to PIL image
+            rotated  = img_pil.transpose(Image.ROTATE_90) #rotate the image 
+            img = np.array(rotated)# convert the page to np array to see as image
+
         # convert the page to np array to see as image
-        img = np.array(img[0])
-        # splitting the array into two equal pieces vertically
-        half_img_lst = np.array_split(img, 2,axis=1)
+        else:
+            img = np.array(img[0])
+
+        # splitting the array into 51% sliced pieces vertically
+        left_side = img[:,:-(round(img.shape[1]*0.49))]
+        right_side = img[:,(round(img.shape[1]*0.49)):]
         # read the text for each half with pytessaract
-        text_1 = str(((pytesseract.image_to_string(half_img_lst[0], lang="fra+nld"))))
-        text_2 = str(((pytesseract.image_to_string(half_img_lst[1], lang="fra+nld"))))
-        del half_img_lst
+        text_1 = str(((pytesseract.image_to_string(left_side, lang="fra+nld"))))
+        text_2 = str(((pytesseract.image_to_string(right_side, lang="fra+nld"))))
+        del left_side, right_side
         # if language detection of each half is equal, or if fr/nl is not dominant
         # on either side, the page is not in two column format
         # that means we have one language follow the other or all in french text
@@ -180,9 +202,11 @@ def Welcome(detector, pdf_path):
 
 # Start text extraction
 job_total = len(scrape)
-i = 1640
+i = 474
 detector = LanguageIdentification()
-for filename in scrape.index[1640:1800]:
+for filename in scrape.index[474:475]:
+    print(type(filename))
     print(f'starting {i}/{job_total}', filename)
     Welcome(detector, scraping_folder / filename)
     i += 1
+del detector
