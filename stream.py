@@ -41,23 +41,36 @@ def main():
     categories = ()
     for category in category_dict:
         categories = categories + (category, )
-    mode = st.selectbox("Select Category",categories)
-    st.markdown("###")
+    mode = st.selectbox("Select Sector",categories)
     if len(category_dict[mode][1]) > 0:
-        st.radio("Sub Category", category_dict[mode][1])
+        st.radio("Sub-sector", category_dict[mode][1])
     else:
         st.write(mode)
-
     st.markdown("###")
-    date = st.date_input("Effective date", datetime.date(2021,3,4))
-    st.write(date)
+    
+    effective_date = st.date_input("Effective date")
     st.markdown("###")
 
+    keywords = st.text_input("Add keywords").split(",")
+    st.markdown("###")
+
+    st.multiselect('Keywords', options = keywords)
+
+    if st.button("Generate"):
+        st.write("check out this [ link ]( https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py)")
+        generate_links()
+
+
+def valid_date(start_date):
+    st.write(start_date[0:10])
+
+
+def generate_links():
     with open('pipeline/model/clas.pkl', 'rb') as f:
         clas = pickle.load(f)
-
-    url = "https://public-search.emploi.belgique.be/website-download-service/joint-work-convention/"
     
+    url = "https://public-search.emploi.belgique.be/website-download-service/joint-work-convention/"
+
     for row in clas.iterrows():
         start_date = row[1][6]
         end_date = row[1][7]
@@ -70,13 +83,9 @@ def main():
 
         st.write("["+ row[0] + "]" + "(" + file_link + ")")
         break
+
     st.write(clas)
 
-    if st.button("Analyse"):
-        st.write("check out this [ link ]( https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py)")
-
-def valid_date(start_date):
-    st.write(start_date[0:10])
 
 if __name__ == "__main__":
     main()

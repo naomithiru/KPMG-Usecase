@@ -1,5 +1,6 @@
 import json
-import mysql.connector
+# import mysql.connector
+import sys
 
 
 def save_to_db(json_file):
@@ -12,4 +13,5 @@ def save_to_db(json_file):
         i += 1
 
 
-save_to_db("src/scraping/output/responses_2018_now.json")
+# save_to_db("src/scraping/output/responses_2018_now.json")
+print(sys.path)
