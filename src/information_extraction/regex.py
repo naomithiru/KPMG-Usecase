@@ -74,7 +74,7 @@ def add_effective_date(df):
             try:
                 df_row['fromDate'] = datetime.date(int(match[7]), get_month_digit(match[6]), 1)
             except:
-                pass
+            	df_row['fromDate'] = np.nan
         else:
             df_row['fromDate'] = np.nan
         
@@ -87,7 +87,7 @@ def add_effective_date(df):
             try:
                 df_row['endDate'] = datetime.date(int(match[7]), get_month_digit(match[6]), 28)
             except:
-                pass
+            	df_row['endDate'] = np.nan
         else:
             df_row['endDate'] = np.nan
         
