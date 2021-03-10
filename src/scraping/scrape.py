@@ -7,15 +7,13 @@ import time
 
 import pandas as pd
 
-def scrape_new():
+def scrape_new(current_clas_location):
     '''
     This function gets the json formatted post request result form the web API
     for the missing documents and returns their metadata in a dataframe
     '''
 
-    clas_location = Path('pipeline/model/clas_new.pkl')
-
-    with open(clas_location, 'rb') as f:
+    with open(current_clas_location / 'clas.pkl', 'rb') as f:
         old = load(f)
 
     start = old.sort_values(by = "publicationDate").iloc[-1]["publicationDate"].split("+")[0]+"Z"
@@ -64,8 +62,9 @@ def scrape_new():
     json_file = json.dumps(response.json())
     new = pd.read_json(json_file)
 
-    # return a dataframe with only the info we use from scraping
-    # according to our DataFrame convention format
+    # If the result is not empty
+    # return a dataframe with only the info we use from the scraped json
+    # & reformat to our DataFrame convention
     try:
         new['documentLink'] = new.documentLink.apply(lambda x: x.replace('/', '-'))
         new.set_index('documentLink', inplace = True)
@@ -90,8 +89,20 @@ def scrape_new():
         new['docBodyFr'] = ''
         new['docBodyFr'] = new['docBodyFr'].astype("string")
 
+        # make a depositNumberLink column with html
+        def depositNumberLink(depositNumberSeries):
+            base_url = "https://public-search.emploi.belgique.be/website-download-service/joint-work-convention/"
+            appendix = depositNumberSeries.index.str.replace("-", "/", 1).tolist()
+            url = [base_url + file for file in appendix]
+            html = [f'<a href="{url}">{depositNumber}</a>' for url, depositNumber in zip(url, depositNumberSeries)]
+
+            return html
+
+        new['depositNumberLink'] = new[['depositNumber']].apply(depositNumberLink)
+
         # select our columns
         new = new[['depositNumber',
+                    'depositNumberLink',
                     'displayJcId',
                     'titleFr',
                     'themesFr',
