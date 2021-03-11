@@ -8,14 +8,16 @@
     3) Investigation on how to structure the text into Articles (split words, bounding box, others?)  
 		    Didn't do
        
-    4) Kind of succeed in detecting the lowest Paragraph hierarchy (targeted removal of newline characters inside paragraphs with regex)
+    4) Kind of succeed in detecting the lowest Paragraph hierarchy  
+		    targeted removal of newline characters inside paragraphs with regex
        
     5) This was enough to extract applicable to and CLA durations reliably
        
     6) Enough to extract related CLA info or specific topic key figures?
 		    Under study
 
-    7) Choose additional unemployment payments due to corona as key figure for extraction (automatic labeling found 24 documents across committees)
+    7) Choose additional unemployment payments due to corona as key figure for extraction  
+		    automatic labeling found 24 documents across committees
        
     8) Set up text span annotation tool for this topic (future training of NER and sequence classifier)
 		    * start/end dates/daily amounts/max yearly amount labels ==> for key figure extraction
