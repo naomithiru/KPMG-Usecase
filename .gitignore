@@ -1,2 +1,4 @@
 .vscode/
 .ipynb_checkpoints/
+pipeline/html/
+pipeline/model/clas_version2.pkl

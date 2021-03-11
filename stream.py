@@ -1,8 +1,10 @@
 import streamlit as st
+import streamlit.components.v1 as stc
 import pandas as pd
 from datetime import date, datetime
 from dateutil import relativedelta
 import pickle
+import codecs
 
 
 category_dict = {
@@ -59,48 +61,64 @@ def main():
     keywords = [x.strip() for x in st.text_input("Add keywords or phrases (Separate words, by comma)").split(",")]
     # st.multiselect(None, options = keywords, default = keywords)
     st.markdown("###")
-    st.markdown('Streamlit is **_really_cool**. :sad:')
 
     if st.button("Generate"):
+        st.markdown("###")
         # st.write("check out this [ link ]( https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py)")
         generate_links(effective_date, keys, keywords)
-
-
-def valid_date(start_date):
-    st.write(start_date[0:10])
+        # get_html()
+        # get_from_html('pipeline/html/index.html')
 
 
 def generate_links(date, sectors, keywords):
     with open('pipeline/model/clas_newer.pkl', 'rb') as f:
         clas = pickle.load(f)
 
+    html_message = ""
+    number = 1
+
     for row in clas.iterrows():
+        check = 0
         if str(row[1][6]) == "nan" and str(row[1][9]) == "nan":
             pass
         elif str(row[1][6]) == "nan":
             if row[1][9] <= date and row[1][1] in sectors and keyword_search(row[1][8], keywords):
-                print_details(row)
+                number += 1
+                check += 1
         elif str(row[1][9]) == "nan":
             if row[1][6] >= date and row[1][1] in sectors and keyword_search(row[1][8], keywords):
-                print_details(row)
+                number += 1
+                check += 1
         else:
             if row[1][9] <= date and row[1][6] >= date and row[1][1] in sectors and keyword_search(row[1][8], keywords):
-                print_details(row)
+                number += 1
+                check += 1
+        
+        if check == 1:
+            html_message += get_row_details(row, number)
+    get_html_page(html_message)
+    
 
-
-def print_details(row):
-    deposit = row[1][0]
-    start_date = row[1][9]
-    end_date = row[1][6]
+def get_row_details(row, number):
+    deposit = str(row[1][0])
+    start_date = str(row[1][9])
+    end_date = str(row[1][6])
+    jcid = str(row[1][1])
     url = "https://public-search.emploi.belgique.be/website-download-service/joint-work-convention/"
     file_link = url + row[0].replace("-", "/", 1)
-    hyperlink = "["+ row[0] + "]" + "(" + file_link + ")"
-    st.write(deposit, start_date, end_date, hyperlink)
+    # column1 = "width: 260px;"
+    # column2 = "width: 160px;"
+    # column3 = "width: 245px;"
+    # column4 = "width: 110px;"
+    # column5 = "width: 222px;"
 
+    html_column = "<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td><a href=\"{}\">Download file</a></td></tr>".format(deposit, start_date, end_date, jcid, file_link)
+    # html_code = '<h4>'+ str(number) + ". " + str(deposit)+ '</h4>'
+    # st.markdown(html_code, unsafe_allow_html=True)
+    # hyperlink = "["+ row[0] + "]" + "(" + file_link + ")"
+    # st.write(deposit, start_date, end_date, hyperlink)
 
-
-def date_format(date):
-    pass
+    return html_column
 
 
 def keyword_search(text, keyword_list):
@@ -110,6 +128,41 @@ def keyword_search(text, keyword_list):
         return True
     else:
         return False
+
+
+def get_html_page(columns):
+    column1 = "width: 260px;padding-left: 40px;"
+    column2 = "width: 160px;"
+    column3 = "width: 245px;"
+    column4 = "width: 110px;text-align: right;"
+    column5 = "width: 222px;text-align: right;padding-right: 62px;"
+
+    html_code = "<div>\
+                    <div>\
+                        <table>\
+                            <thead>\
+                                <tr>\
+                                    <th style=\"{}\">Deposit Number</th>\
+                                    <th style=\"{}\">Start Date</th>\
+                                    <th style=\"{}\">End Date</th>\
+                                    <th style=\"{}\">JCID</th>\
+                                    <th style=\"{}\">Link to File</th>\
+                                </tr>\
+                            </thead>\
+                            <tbody>\
+                                {}\
+                            </tbody>\
+                        </table>\
+                    </div>\
+                </div>".format(column1, column2, column3, column4, column5, columns)
+    
+    st.write(html_code, unsafe_allow_html=True)
+
+
+def get_from_html(htmf_file):
+     html_code = codecs.open(htmf_file, 'r')
+     page = html_code.read()
+     stc.html(page, width=700, height=500, scrolling=False)
 
 
 if __name__ == "__main__":
