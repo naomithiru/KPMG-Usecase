@@ -71,8 +71,10 @@ def main():
 
 
 def generate_links(date, sectors, keywords):
-    with open('pipeline/model/clas_newer.pkl', 'rb') as f:
+    with open('pipeline/model/clas.pkl', 'rb') as f:
         clas = pickle.load(f)
+    
+    st.write(clas)
 
     html_message = ""
     number = 1
@@ -163,6 +165,13 @@ def get_from_html(htmf_file):
      html_code = codecs.open(htmf_file, 'r')
      page = html_code.read()
      stc.html(page, width=700, height=500, scrolling=False)
+
+
+def get_nice_date(raw_date):
+    month_date = {
+        1: "January",
+        2: ""
+    }
 
 
 if __name__ == "__main__":
