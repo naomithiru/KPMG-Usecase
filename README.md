@@ -22,3 +22,10 @@
     8) Set up text span annotation tool for this topic (future training of NER and sequence classifier)
 		    * start/end dates/daily amounts/max yearly amount labels ==> for key figure extraction
 		    * whole paragraphs ==> to detect switch of topic in documents
+
+    9) Themes tagging. Agreed to not assign enough time and resources to tackle all the following challenges:
+       a) Some theme only present with other themes. Filtering by presence of a theme among the document themes.
+       b) Some documents missing tags. Using only documents having at least one tag.
+       c) Lack of enough samples for some themes. Acceptance of different accuracy per theme.
+       d) Lack of reliable true negatives (e.g. chomage temporaire). Use of multilabel classification checking similarities with corpus of theme docs.
+       e) Selection of keywords per theme to be used avoding too many unecessary overlaps. Not enoug time for it.
