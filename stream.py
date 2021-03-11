@@ -51,7 +51,7 @@ def main():
     keys = [sector.split("-")[0].lstrip() for sector in selection]
     st.markdown("###")
 
-    chosen_date = st.date_input("Effective date", date(2021, 4, 10))
+    chosen_date = st.date_input("Effective date", date.today())
     effective_date = chosen_date + relativedelta.relativedelta(months=1, day=1)
     st.write(effective_date)
     st.markdown("###")
@@ -59,6 +59,7 @@ def main():
     keywords = [x.strip() for x in st.text_input("Add keywords or phrases (Separate words, by comma)").split(",")]
     # st.multiselect(None, options = keywords, default = keywords)
     st.markdown("###")
+    st.markdown('Streamlit is **_really_cool**. :sad:')
 
     if st.button("Generate"):
         # st.write("check out this [ link ]( https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py)")
