@@ -113,7 +113,7 @@ def get_row_details(row, number):
     publi_date = get_nice_date(date_format(row[1][4]))
     start_date = get_nice_date(row[1][10])
     end_date = get_nice_date(row[1][6])
-    scope = str(row[1][5])[0:20] + '...'
+    scope = str(row[1][5])[0:50] + '...'
     url = "https://public-search.emploi.belgique.be/website-download-service/joint-work-convention/"
     file_link = url + row[0].replace("-", "/", 1)
     # column1 = "width: 260px;"
@@ -151,13 +151,13 @@ def keyword_search(text, keyword_list):
 
 def get_html_page(columns):
     column1 = "width: 100px;text-align: left;"
-    column2 = "width: 120px;text-align: center;"
+    column2 = "width: 160px;text-align: left;"
     column3 = "width: 120px;text-align: left;"
-    column4 = "width: 110px;text-align: center;"
-    column5 = "width: 60px; text-align: right"
-    column6 = "width: 120px;text-align: left"
-    column7 = "width: 120px;text-align: left"
-    column8 = "width: 100px;text-align: left"
+    column4 = "width: 160px;text-align: left;"
+    column5 = "width: 60px; text-align: right;"
+    column6 = "width: 120px;text-align: left;"
+    column7 = "width: 120px;text-align: left;"
+    column8 = "width: 100px;text-align: left;"
 
     html_code = "<div>\
                     <div>\
