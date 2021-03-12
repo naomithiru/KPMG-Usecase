@@ -38,9 +38,11 @@ def main():
         }
     </style>
     '''
-    fname = pathlib.Path('pipeline/model/clas.pkl')
-    last_update = datetime.fromtimestamp(fname.stat().st_mtime)
-    update_html = "<h3>Last update : {}".format(str(last_update)[0:10])
+    # fname = pathlib.Path('pipeline/model/clas.pkl')
+    update = open('pipeline/model/update.txt', 'r')
+    update_lines = update.readlines()
+    # last_update = datetime.fromtimestamp(fname.stat().st_mtime)
+    update_html = "<h4 style=\"text-align: right; color: green;\">{}<br><br>{}</h4>".format(update_lines[0], update_lines[1])
     st.markdown(page_bg_img, unsafe_allow_html=True)
     st.markdown(update_html, unsafe_allow_html=True)
     st.title("Partena CLA Monitor")
@@ -59,8 +61,6 @@ def main():
 
     chosen_date = st.date_input("Choose date", date.today())
     effective_date = chosen_date + relativedelta.relativedelta(months=1, day=1)
-    date_html = "<p>The effective date:  {}</p>".format(effective_date)
-    st.markdown(date_html, unsafe_allow_html=True)
     st.markdown("###")
 
     keywords = [x.strip() for x in st.text_input("Add keywords or phrases (Separate words, by comma)").split(",")]
