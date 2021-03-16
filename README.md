@@ -1,4 +1,8 @@
-# KPMG-Usecase
+# A monitor of Collective Labour Agreements
+
+As a team of 5 we rose to the challenge from KPMG to extract knowledge from publicly published collective labour agreements. We learned about the client's process of manually watching for new publications and the subsequent tracking of key changes in sector labour rules.  
+We found 2 key search functions were not available on the government website; the ability to filter more than 1 sector, and the ability to see just the agreements currently in effect, regardless of their publication date. As a consequence, we crystallized our objective into building a webapp for the discovery and first interpretation of new agreements. 
+
 
     1) Checking documents for topic hierarchy (chapters, sections, articles, paragraphs)
 		    Chapters sometimes hold different topics. Article level detection seems best.
