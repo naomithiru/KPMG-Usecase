@@ -47,8 +47,8 @@ In the end we deployed and presented our webApp to the client. It is availale at
 [cla-monitor.herokuapp.com](https://cla-monitor.herokuapp.com/)  
 
 ### The team:  
-* [Davy Nimbona]: streamlit and deployment
-* Selma Esen: page layout detection and automatic regex labeling
+* [Davy Nimbona](https://github.com/davymariko): streamlit and deployment
+* [Selma Esen](https://github.com/selmaesen): page layout detection and automatic regex labeling
 * [Naomi Thiru](https://github.com/naomithiru/): field of application regexing and Labelstudio annotation
-* Francesco Mariotini: topic modeling
-* Philippe Fimmers (PM): regex duration extraction and language detection
+* [Francesco Mariotini](https://github.com/FrancescoMariottini): topic modeling
+* [Philippe Fimmers](https://github.com/phfimmers) (PM): regex duration extraction and language detection
